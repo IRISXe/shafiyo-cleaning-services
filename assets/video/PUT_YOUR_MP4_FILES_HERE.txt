@@ -1,0 +1,15 @@
+Copy your original video files into this folder with these exact names
+(they already have the right names — just drop them in):
+
+bulding_cleaning.mp4
+hotel_cleaning.mp4
+hotels_hospitality.mp4
+industrial_cleaning.mp4
+logistics_cleaning.mp4
+office_cleaning.mp4
+pest_control.mp4
+property_cleaning.mp4
+resturant_cleaning.mp4
+shopping_malls.mp4
+swimming_pool_cleaning.mp4
+warehouse_cleaning.mp4
