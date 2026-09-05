@@ -77,13 +77,15 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 img,video{max-width:100%;display:block;}
+video[autoplay]{opacity:0;transition:opacity .6s var(--ease);}
+video[autoplay].video-ready{opacity:1;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
 ul{list-style:none;}
 .container{width:100%;max-width:1280px;margin-inline:auto;padding-inline:24px;}
 @media(min-width:768px){.container{padding-inline:40px;}}
 @media(min-width:1200px){.container{padding-inline:56px;}}
- 
+
 .eyebrow{
   display:inline-flex;align-items:center;gap:10px;
   font-size:13px;font-weight:700;letter-spacing:.06em;
@@ -101,19 +103,20 @@ html[lang="ar"] .eyebrow{letter-spacing:0;}
 }
 html[lang="ar"] .h2{font-weight:800;letter-spacing:0;}
 .lead{font-size:clamp(16px,1.6vw,19px);color:var(--ink-soft);max-width:640px;line-height:1.8;}
-.section{padding-block:110px;position:relative;}
-@media(max-width:768px){.section{padding-block:72px;}}
+.section{padding-block:110px;position:relative;scroll-margin-top:90px;}
+@media(max-width:768px){.section{padding-block:72px;scroll-margin-top:76px;}}
+#home{scroll-margin-top:0;}
 .section-head{max-width:720px;margin-bottom:56px;}
 .section-head.center{margin-inline:auto;text-align:center;}
 .section-head.center .eyebrow::before{display:none;}
- 
+
 /* ---------- reveal ---------- */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease), transform .8s var(--ease);}
 .reveal.in{opacity:1;transform:translateY(0);}
 .reveal-scale{opacity:0;transform:scale(.94);transition:opacity .8s var(--ease), transform .8s var(--ease);}
 .reveal-scale.in{opacity:1;transform:scale(1);}
 .stagger > *{transition-delay:calc(var(--i,0) * 90ms);}
- 
+
 /* ---------- buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;gap:10px;
@@ -142,7 +145,7 @@ html[dir="rtl"] .btn.arrow svg{transform:scaleX(-1);}
 .btn-wa{background:#1fae5b;color:#fff;}
 .btn-wa:hover{background:#189249;transform:translateY(-3px);}
 .btn-sm{padding:11px 20px;font-size:13.5px;}
- 
+
 /* ================= NAVBAR ================= */
 .navbar{
   position:fixed;inset-inline:0;top:0;z-index:100;
@@ -185,7 +188,7 @@ html[dir="rtl"] .btn.arrow svg{transform:scaleX(-1);}
 .burger.open span{background:transparent;}
 .burger.open span::before{transform:rotate(45deg);top:0;}
 .burger.open span::after{transform:rotate(-45deg);top:0;}
- 
+
 .mobile-menu{
   position:fixed;inset:0;z-index:99;background:var(--navy-950);
   display:flex;flex-direction:column;padding:110px 32px 40px;
@@ -195,12 +198,12 @@ html[dir="rtl"] .btn.arrow svg{transform:scaleX(-1);}
 .mobile-menu.open{transform:translateY(0);}
 .mobile-menu a{color:#fff;font-size:26px;font-weight:800;padding-block:16px;border-bottom:1px solid rgba(255,255,255,.1);}
 .mobile-menu .btn{margin-top:28px;justify-content:center;}
- 
+
 @media(max-width:960px){
   .nav-links{display:none;}
   .burger{display:flex;}
 }
- 
+
 /* ================= HERO ================= */
 .hero{
   position:relative;min-height:100svh;display:flex;align-items:flex-end;
@@ -243,12 +246,12 @@ html[lang="ar"] .hero h1{letter-spacing:0;font-weight:800;}
 }
 .scroll-indicator .line{width:1px;height:36px;background:linear-gradient(var(--cyan-400),transparent);animation:scrollLine 2s infinite var(--ease);}
 @keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
- 
+
 @media(max-width:640px){
   .hero-inner{padding-block:130px 60px;}
   .hero-bottom{flex-direction:column;align-items:flex-start;}
 }
- 
+
 /* ================= ABOUT ================= */
 .about-grid{display:grid;grid-template-columns:1fr;gap:60px;align-items:center;}
 @media(min-width:960px){.about-grid{grid-template-columns:1fr 1fr;gap:70px;}}
@@ -260,12 +263,14 @@ html[lang="ar"] .hero h1{letter-spacing:0;font-weight:800;}
 .value-chip{
   display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;
   background:var(--mist);border:1px solid var(--line);
+  transition:transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
 }
+.value-chip:hover{transform:translateY(-3px);border-color:var(--cyan-500);box-shadow:var(--shadow-md);}
 .value-chip .ic{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--cyan-500),var(--royal-600));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .value-chip .ic svg{width:17px;height:17px;color:#fff;}
 .value-chip b{display:block;font-size:13.5px;color:var(--navy-900);}
 .value-chip span{font-size:11.5px;color:var(--ink-soft);}
- 
+
 /* ================= MISSION / VISION ================= */
 .mv-section{background:var(--navy-950);position:relative;overflow:hidden;}
 .mv-section::before{
@@ -288,7 +293,7 @@ html[lang="ar"] .hero h1{letter-spacing:0;font-weight:800;}
 .mv-card p{color:rgba(255,255,255,.72);font-size:16px;line-height:1.85;}
 .mv-card .glyph{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;background:linear-gradient(135deg,var(--cyan-500),var(--royal-600));}
 .mv-card .glyph svg{width:26px;height:26px;color:#fff;}
- 
+
 /* ================= SERVICES ================= */
 .services-grid{display:grid;grid-template-columns:1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden;}
 @media(min-width:720px){.services-grid{grid-template-columns:1fr 1fr;}}
@@ -321,7 +326,7 @@ html[dir="rtl"] .service-card:hover .arrow svg{transform:scaleX(-1) translateX(3
   position:absolute;top:24px;inset-inline-end:24px;z-index:2;font-size:10.5px;font-weight:800;
   padding:5px 11px;border-radius:100px;background:rgba(217,164,65,.15);color:var(--gold);letter-spacing:.05em;text-transform:uppercase;
 }
- 
+
 /* ================= SPECIALIZED (pest/pool) ================= */
 .spec-block{display:grid;grid-template-columns:1fr;gap:0;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-lg);}
 @media(min-width:900px){.spec-block{grid-template-columns:1fr 1fr;}}
@@ -340,7 +345,7 @@ html[dir="rtl"] .service-card:hover .arrow svg{transform:scaleX(-1) translateX(3
 .spec-list li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:rgba(255,255,255,.85);line-height:1.5;}
 .spec-list li svg{width:18px;height:18px;flex-shrink:0;color:var(--cyan-400);margin-top:2px;}
 .specialized-wrap{display:flex;flex-direction:column;gap:36px;}
- 
+
 /* ================= SECTORS ================= */
 .sectors-grid{display:grid;grid-template-columns:1fr;gap:20px;}
 @media(min-width:640px){.sectors-grid{grid-template-columns:1fr 1fr;}}
@@ -361,7 +366,7 @@ html[dir="rtl"] .service-card:hover .arrow svg{transform:scaleX(-1) translateX(3
 .sector-card:hover .sector-arrow{background:var(--cyan-500);transform:translateY(0);opacity:1;}
 .sector-arrow svg{width:15px;height:15px;color:#fff;}
 html[dir="rtl"] .sector-arrow svg{transform:scaleX(-1);}
- 
+
 /* ================= WHY SHAFIYO ================= */
 .why-list{display:flex;flex-direction:column;}
 .why-item{
@@ -376,7 +381,7 @@ html[dir="rtl"] .sector-arrow svg{transform:scaleX(-1);}
 .why-media{display:none;border-radius:16px;overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow-md);}
 @media(min-width:860px){.why-media{display:block;}}
 .why-media img{width:100%;height:100%;object-fit:cover;}
- 
+
 /* ================= PROCESS ================= */
 .process-wrap{position:relative;}
 .process-line{position:absolute;top:29px;inset-inline:0;height:2px;background:var(--line);display:none;}
@@ -394,7 +399,7 @@ html[dir="rtl"] .process-line-fill{inset-inline-start:auto;inset-inline-end:0;}
 .process-step.active .process-dot{background:linear-gradient(135deg,var(--cyan-500),var(--royal-600));border-color:transparent;color:#fff;box-shadow:0 10px 24px -8px rgba(23,184,201,.6);}
 .process-step h4{font-size:19px;font-weight:800;color:var(--navy-900);margin-bottom:8px;}
 .process-step p{font-size:14.5px;color:var(--ink-soft);line-height:1.7;max-width:260px;}
- 
+
 /* ================= TEAMS IN ACTION ================= */
 .teams-header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px;}
 .teams-grid{display:grid;grid-template-columns:1fr;gap:16px;}
@@ -416,7 +421,7 @@ html[dir="rtl"] .process-line-fill{inset-inline-start:auto;inset-inline-end:0;}
 .play-btn svg{width:16px;height:16px;color:#fff;margin-inline-start:2px;}
 html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transform:scaleX(-1);}
 .team-tile.playing .play-btn{opacity:0;}
- 
+
 /* ================= WHATSAPP FLOAT ================= */
 .wa-float{
   position:fixed;bottom:26px;inset-inline-end:26px;z-index:90;
@@ -432,6 +437,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
 }
 @keyframes waPulse{0%{transform:scale(1);opacity:.5;}100%{transform:scale(1.6);opacity:0;}}
 @media(max-width:640px){.wa-float{width:54px;height:54px;bottom:18px;inset-inline-end:18px;}.wa-float svg{width:26px;height:26px;}}
+
 /* ================= MOBILE NAVBAR FIX ================= */
 @media(max-width:480px){
   .navbar .container{gap:8px;padding-inline:14px;}
@@ -443,7 +449,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
   .lang-toggle button{padding:5px 10px;font-size:11px;}
   .burger{width:38px;height:38px;}
 }
- 
+
 /* ================= CONTACT ================= */
 .contact-section{background:var(--mist);}
 .contact-grid{display:grid;grid-template-columns:1fr;gap:44px;}
@@ -479,7 +485,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
 .form-success{display:none;align-items:center;gap:12px;background:#eafaf1;border:1px solid #b8ecce;color:#1a7a45;padding:16px 18px;border-radius:14px;font-size:14px;font-weight:600;margin-bottom:20px;}
 .form-success.show{display:flex;}
 .form-success svg{width:20px;height:20px;flex-shrink:0;}
- 
+
 /* ================= FOOTER ================= */
 .footer{background:var(--navy-950);color:#fff;padding-block:80px 30px;position:relative;overflow:hidden;}
 .footer::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 400px at 10% 0%, rgba(23,184,201,.12), transparent 60%);}
@@ -494,8 +500,9 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
 .footer p.desc{color:rgba(255,255,255,.6);font-size:14.5px;line-height:1.8;max-width:340px;}
 .footer h5{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:22px;}
 .footer-links li{margin-bottom:14px;}
-.footer-links a{color:rgba(255,255,255,.78);font-size:14.5px;transition:color .3s;}
-.footer-links a:hover{color:var(--cyan-400);}
+.footer-links a{color:rgba(255,255,255,.78);font-size:14.5px;transition:color .3s, transform .3s var(--ease);display:inline-block;}
+.footer-links a:hover{color:var(--cyan-400);transform:translateX(4px);}
+html[dir="rtl"] .footer-links a:hover{transform:translateX(-4px);}
 .footer-contact li{display:flex;align-items:center;gap:10px;margin-bottom:16px;font-size:14.5px;color:rgba(255,255,255,.78);}
 .footer-contact svg{width:17px;height:17px;color:var(--cyan-400);flex-shrink:0;}
 .footer-social{display:flex;gap:10px;margin-top:20px;}
@@ -503,7 +510,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
 .footer-social a:hover{background:var(--cyan-500);transform:translateY(-3px);}
 .footer-social svg{width:19px;height:19px;}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding-top:26px;font-size:13px;color:rgba(255,255,255,.45);}
- 
+
 /* ================= UTIL ================= */
 .grid-2{display:grid;grid-template-columns:1fr;gap:24px;}
 @media(min-width:768px){.grid-2{grid-template-columns:1fr 1fr;}}
@@ -513,7 +520,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
 </style>
 </head>
 <body>
- 
+
 <!-- ============ NAVBAR ============ -->
 <header class="navbar" id="navbar">
   <div class="container">
@@ -532,12 +539,12 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </header>
- 
+
 <div class="mobile-menu" id="mobileMenu">
   <nav id="mobileLinks" style="display:flex;flex-direction:column;"></nav>
   <a class="btn btn-primary" id="mobileWaBtn" target="_blank" rel="noopener"></a>
 </div>
- 
+
 <!-- ============ HERO ============ -->
 <section class="hero" id="home">
   <div class="hero-media">
@@ -559,7 +566,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </section>
- 
+
 <!-- ============ ABOUT ============ -->
 <section class="section" id="about">
   <div class="container">
@@ -582,7 +589,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </section>
- 
+
 <!-- ============ MISSION / VISION ============ -->
 <section class="section mv-section">
   <div class="container">
@@ -602,7 +609,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </section>
- 
+
 <!-- ============ SERVICES ============ -->
 <section class="section" id="services">
   <div class="container">
@@ -614,7 +621,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     <div class="services-grid reveal-scale" id="servicesGrid"></div>
   </div>
 </section>
- 
+
 <!-- ============ SPECIALIZED SERVICES (pest + pool) ============ -->
 <section class="section" id="specialized" style="padding-top:0;">
   <div class="container">
@@ -652,7 +659,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </section>
- 
+
 <!-- ============ SECTORS ============ -->
 <section class="section" id="sectors" style="background:var(--mist);">
   <div class="container">
@@ -664,7 +671,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     <div class="sectors-grid reveal-scale" id="sectorsGrid"></div>
   </div>
 </section>
- 
+
 <!-- ============ WHY SHAFIYO ============ -->
 <section class="section" id="why">
   <div class="container">
@@ -675,7 +682,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     <div class="why-list" id="whyList"></div>
   </div>
 </section>
- 
+
 <!-- ============ PROCESS ============ -->
 <section class="section" style="background:var(--mist);">
   <div class="container">
@@ -689,7 +696,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </section>
- 
+
 <!-- ============ TEAMS IN ACTION ============ -->
 <section class="section" id="teams">
   <div class="container">
@@ -703,7 +710,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     <div class="teams-grid reveal-scale" id="teamsGrid"></div>
   </div>
 </section>
- 
+
 <!-- ============ CONTACT ============ -->
 <section class="section contact-section" id="contact">
   <div class="container">
@@ -763,7 +770,7 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </section>
- 
+
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
   <div class="container">
@@ -792,11 +799,11 @@ html[dir="rtl"] .play-btn svg{margin-inline-start:0;margin-inline-end:2px;transf
     </div>
   </div>
 </footer>
- 
+
 <a class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.393.633 4.632 1.744 6.573L4 29l7.617-1.71A11.94 11.94 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3Zm0 21.818c-1.973 0-3.85-.53-5.469-1.489l-.392-.232-4.516 1.014 1.05-4.406-.257-.406A9.79 9.79 0 0 1 5.182 15c0-5.966 4.853-10.818 10.819-10.818S26.82 9.034 26.82 15 21.967 24.818 16.001 24.818Zm5.938-8.106c-.325-.163-1.92-.947-2.218-1.056-.297-.108-.514-.163-.73.163-.216.325-.838 1.055-1.027 1.272-.19.216-.379.244-.703.081-.325-.163-1.373-.505-2.615-1.611-.967-.862-1.62-1.927-1.809-2.252-.19-.325-.02-.5.143-.663.146-.145.325-.379.487-.568.163-.19.216-.325.325-.542.108-.216.054-.406-.027-.568-.081-.163-.73-1.756-1-2.406-.264-.633-.532-.547-.73-.557l-.622-.011c-.216 0-.568.081-.865.406-.297.325-1.135 1.11-1.135 2.703 0 1.594 1.162 3.133 1.324 3.35.163.216 2.288 3.494 5.543 4.9.774.334 1.378.534 1.849.684.777.247 1.484.212 2.043.129.623-.093 1.92-.784 2.19-1.542.27-.758.27-1.407.19-1.542-.081-.135-.298-.216-.623-.379Z"/></svg>
 </a>
- 
+
 <script>
 /* ===================== CENTRALIZED BILINGUAL CONTENT ===================== */
 const INSTAGRAM_URL = "https://www.instagram.com/shafiyo_cleaning_services_bpc?utm_source=qr&igsi=Z3M1dGZyanN0cGI4";
@@ -804,12 +811,12 @@ const WHATSAPP_NUMBER = "97337693448";
 const PHONE_1 = "+973 37693448";
 const PHONE_2 = "+973 33134439";
 const EMAIL = "shafiyocleaningservicesbpc@gmail.com";
- 
+
 const WA_MSG = {
   ar: "مرحباً، أود الحصول على عرض سعر مجاني من شركة شافيو لخدمات التنظيف.",
   en: "Hello Shafiyo Cleaning Services, I would like to request a free quotation."
 };
- 
+
 const content = {
   ar: {
     meta:{ title:"شافيو لخدمات التنظيف | خدمات تنظيف احترافية في البحرين" },
@@ -926,7 +933,7 @@ const content = {
       by:"شركة شراكة بحرينية"
     }
   },
- 
+
   en:{
     meta:{ title:"Shafiyo Cleaning Services | Professional Cleaning Services in Bahrain" },
     nav:{
@@ -1043,7 +1050,7 @@ const content = {
     }
   }
 };
- 
+
 /* icons */
 const ICONS = {
   quality:'<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15a4 4 0 100-8 4 4 0 000 8zM8.5 14L7 21l5-2.5L17 21l-1.5-7"/></svg>',
@@ -1060,18 +1067,18 @@ const ICONS = {
   wa:'<svg fill="currentColor" viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.393.633 4.632 1.744 6.573L4 29l7.617-1.71A11.94 11.94 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3Zm0 21.818c-1.973 0-3.85-.53-5.469-1.489l-.392-.232-4.516 1.014 1.05-4.406-.257-.406A9.79 9.79 0 0 1 5.182 15c0-5.966 4.853-10.818 10.819-10.818S26.82 9.034 26.82 15 21.967 24.818 16.001 24.818Zm5.938-8.106c-.325-.163-1.92-.947-2.218-1.056-.297-.108-.514-.163-.73.163-.216.325-.838 1.055-1.027 1.272-.19.216-.379.244-.703.081-.325-.163-1.373-.505-2.615-1.611-.967-.862-1.62-1.927-1.809-2.252-.19-.325-.02-.5.143-.663.146-.145.325-.379.487-.568.163-.19.216-.325.325-.542.108-.216.054-.406-.027-.568-.081-.163-.73-1.756-1-2.406-.264-.633-.532-.547-.73-.557l-.622-.011c-.216 0-.568.081-.865.406-.297.325-1.135 1.11-1.135 2.703 0 1.594 1.162 3.133 1.324 3.35.163.216 2.288 3.494 5.543 4.9.774.334 1.378.534 1.849.684.777.247 1.484.212 2.043.129.623-.093 1.92-.784 2.19-1.542.27-.758.27-1.407.19-1.542-.081-.135-.298-.216-.623-.379Z"/></svg>'
 };
 const VALUE_ICONS = [ICONS.quality, ICONS.trust, ICONS.speed, ICONS.eco];
- 
+
 /* ===================== STATE ===================== */
 let lang = "ar";
- 
+
 function waLink(msg){ return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`; }
- 
+
 function render(){
   const c = content[lang];
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   document.title = c.meta.title;
- 
+
   // nav
   document.getElementById("navName").textContent = c.nav.brandName;
   document.getElementById("navSub").textContent = c.nav.brandSub;
@@ -1083,7 +1090,7 @@ function render(){
   mobWa.href = waLink(WA_MSG[lang]); mobWa.textContent = c.nav.wa;
   document.getElementById("btnAr").classList.toggle("active", lang==="ar");
   document.getElementById("btnEn").classList.toggle("active", lang==="en");
- 
+
   // hero
   document.getElementById("heroTag").textContent = c.hero.tag;
   document.getElementById("heroTitle").textContent = c.hero.title;
@@ -1092,14 +1099,14 @@ function render(){
   document.getElementById("heroCta2").textContent = c.hero.cta2;
   document.getElementById("heroTicker").innerHTML = c.hero.ticker.map(t=>`<span>${t}</span>`).join("<span style='opacity:.35'>·</span>");
   document.getElementById("scrollText").textContent = c.hero.scroll;
- 
+
   // about
   document.getElementById("aboutEyebrow").textContent = c.about.eyebrow;
   document.getElementById("aboutHeading").textContent = c.about.heading;
   document.getElementById("aboutCopy").innerHTML = `<p>${c.about.p1}</p><p>${c.about.p2}</p><p>${c.about.p3}</p>`;
   document.getElementById("valueChips").innerHTML = c.about.values.map((v,i)=>`
     <div class="value-chip"><div class="ic">${VALUE_ICONS[i]}</div><div><b>${v[0]}</b><span>${v[1]}</span></div></div>`).join("");
- 
+
   // mission/vision
   document.getElementById("missionLabel").textContent = c.mission.label;
   document.getElementById("missionTitle").textContent = c.mission.title;
@@ -1107,7 +1114,7 @@ function render(){
   document.getElementById("visionLabel").textContent = c.vision.label;
   document.getElementById("visionTitle").textContent = c.vision.title;
   document.getElementById("visionBody").textContent = c.vision.body;
- 
+
   // services
   document.getElementById("servicesEyebrow").textContent = c.services.eyebrow;
   document.getElementById("servicesHeading").textContent = c.services.heading;
@@ -1122,7 +1129,7 @@ function render(){
       <div class="arrow">${ICONS.arrow}</div>
     </div>`).join("");
   bindServiceHover();
- 
+
   // specialized
   document.getElementById("specEyebrow").textContent = c.spec.eyebrow;
   document.getElementById("specHeading").textContent = c.spec.heading;
@@ -1134,7 +1141,7 @@ function render(){
   document.getElementById("poolTitle").textContent = c.spec.pool.title;
   document.getElementById("poolDesc").textContent = c.spec.pool.desc;
   document.getElementById("poolList").innerHTML = c.spec.pool.list.map(li=>`<li>${ICONS.check}<span>${li}</span></li>`).join("");
- 
+
   // sectors
   document.getElementById("sectorsEyebrow").textContent = c.sectors.eyebrow;
   document.getElementById("sectorsHeading").textContent = c.sectors.heading;
@@ -1151,7 +1158,7 @@ function render(){
         </div>
       </div>
     </div>`).join("");
- 
+
   // why
   document.getElementById("whyEyebrow").textContent = c.why.eyebrow;
   document.getElementById("whyHeading").textContent = c.why.heading;
@@ -1161,13 +1168,13 @@ function render(){
       <div class="why-body"><h3>${w.title}</h3><p>${w.body}</p></div>
       <div class="why-media"><img src="assets/poster/${w.img}.jpg" alt="${w.title}" loading="lazy"></div>
     </div>`).join("");
- 
+
   // process
   document.getElementById("processEyebrow").textContent = c.process.eyebrow;
   document.getElementById("processHeading").textContent = c.process.heading;
   document.getElementById("processSteps").innerHTML = c.process.steps.map(s=>`
     <div class="process-step"><div class="process-dot">${s[0]}</div><h4>${s[1]}</h4><p>${s[2]}</p></div>`).join("");
- 
+
   // teams
   document.getElementById("teamsEyebrow").textContent = c.teams.eyebrow;
   document.getElementById("teamsHeading").textContent = c.teams.heading;
@@ -1178,7 +1185,7 @@ function render(){
       <div class="team-tile-label"><span>${t.title}</span><div class="play-btn">${ICONS.play}</div></div>
     </div>`).join("");
   bindTeamTiles();
- 
+
   // contact
   document.getElementById("contactEyebrow").textContent = c.contact.eyebrow;
   document.getElementById("contactHeading").textContent = c.contact.heading;
@@ -1197,7 +1204,7 @@ function render(){
     <a href="tel:${PHONE_1.replace(/\s/g,"")}" class="btn btn-outline btn-sm" style="background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.25);">${ICONS.phone.replace('width="24"','width="16"')} ${c.contact.call}</a>
     <a href="${waLink(WA_MSG[lang])}" target="_blank" rel="noopener" class="btn btn-wa btn-sm">${ICONS.wa.replace('viewBox="0 0 32 32"','viewBox="0 0 32 32" width="16" height="16"')} ${c.contact.wa}</a>
     <a href="mailto:${EMAIL}" class="btn btn-outline btn-sm" style="background:rgba(255,255,255,.06);color:#fff;border-color:rgba(255,255,255,.25);">${ICONS.mail.replace('width="24"','width="16"')} ${c.contact.mail}</a>`;
- 
+
   document.getElementById("l-name").textContent = c.contact.form.name;
   document.getElementById("l-phone").textContent = c.contact.form.phone;
   document.getElementById("l-email").textContent = c.contact.form.email;
@@ -1210,7 +1217,7 @@ function render(){
   document.getElementById("e-phone").textContent = c.contact.form.errPhone;
   document.getElementById("e-email").textContent = c.contact.form.errEmail;
   document.getElementById("formSuccessText").textContent = c.contact.form.success;
- 
+
   // footer
   document.getElementById("footBrand").textContent = c.footer.brand;
   document.getElementById("footBrandType").textContent = c.footer.brandType;
@@ -1229,15 +1236,15 @@ function render(){
     <a href="${waLink(WA_MSG[lang])}" target="_blank" rel="noopener" aria-label="WhatsApp">${ICONS.wa.replace('viewBox="0 0 32 32"','viewBox="0 0 32 32" width="19" height="19"')}</a>`;
   document.getElementById("footCopy").textContent = c.footer.copy;
   document.getElementById("footBy").textContent = c.footer.by;
- 
+
   // floating whatsapp
   document.getElementById("waFloat").href = waLink(WA_MSG[lang]);
- 
+
   initRevealObserver();
   initProcessObserver();
   closeMobileMenu();
 }
- 
+
 /* hover-to-play for service cards */
 function bindServiceHover(){
   document.querySelectorAll(".service-card").forEach(card=>{
@@ -1253,7 +1260,7 @@ function bindServiceHover(){
     });
   });
 }
- 
+
 /* click-to-play for team tiles */
 function bindTeamTiles(){
   document.querySelectorAll(".team-tile").forEach(tile=>{
@@ -1265,7 +1272,7 @@ function bindTeamTiles(){
     });
   });
 }
- 
+
 /* scroll reveal */
 let revealObserver;
 function initRevealObserver(){
@@ -1278,7 +1285,7 @@ function initRevealObserver(){
   }, {threshold:0.12, rootMargin:"0px 0px -60px 0px"});
   els.forEach(el=>revealObserver.observe(el));
 }
- 
+
 /* process line fill on scroll into view */
 function initProcessObserver(){
   const wrap = document.querySelector(".process-wrap");
@@ -1296,13 +1303,13 @@ function initProcessObserver(){
   }, {threshold:0.3});
   obs.observe(wrap);
 }
- 
+
 /* navbar scroll state */
 const navbar = document.getElementById("navbar");
 window.addEventListener("scroll", ()=>{
   navbar.classList.toggle("scrolled", window.scrollY > 40);
 }, {passive:true});
- 
+
 /* mobile menu */
 const burger = document.getElementById("burgerBtn");
 const mobileMenu = document.getElementById("mobileMenu");
@@ -1315,7 +1322,7 @@ function closeMobileMenu(){
     a.addEventListener("click", ()=>{ burger.classList.remove("open"); mobileMenu.classList.remove("open"); });
   });
 }
- 
+
 /* language toggle */
 document.getElementById("langToggle").addEventListener("click", (e)=>{
   const btn = e.target.closest("button[data-lang]");
@@ -1325,7 +1332,7 @@ document.getElementById("langToggle").addEventListener("click", (e)=>{
   lang = newLang;
   render();
 });
- 
+
 /* contact form -> whatsapp */
 document.addEventListener("submit", function(e){
   if(e.target.id !== "quoteForm") return;
@@ -1337,34 +1344,50 @@ document.addEventListener("submit", function(e){
   const email = form.email.value.trim();
   const service = form.service.value;
   const message = form.message.value.trim();
- 
+
   let valid = true;
   const fName = document.getElementById("f-name");
   const fPhone = document.getElementById("f-phone");
   const fEmail = document.getElementById("f-email");
   fName.classList.remove("error"); fPhone.classList.remove("error"); fEmail.classList.remove("error");
- 
+
   if(name.length < 2){ fName.classList.add("error"); valid = false; }
   const phoneDigits = phone.replace(/[^\d+]/g,"");
   if(phoneDigits.length < 7){ fPhone.classList.add("error"); valid = false; }
   if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ fEmail.classList.add("error"); valid = false; }
- 
+
   if(!valid) return;
- 
+
   const successBox = document.getElementById("formSuccess");
   successBox.classList.add("show");
- 
+
   const lines = lang === "ar"
     ? [`مرحباً، أرغب بطلب عرض سعر مجاني من شافيو لخدمات التنظيف.`,`الاسم: ${name}`,`الهاتف: ${phone}`, email ? `البريد: ${email}` : null, `الخدمة: ${service}`, message ? `تفاصيل: ${message}` : null]
     : [`Hello, I'd like to request a free quote from Shafiyo Cleaning Services.`,`Name: ${name}`,`Phone: ${phone}`, email ? `Email: ${email}` : null, `Service: ${service}`, message ? `Details: ${message}` : null];
   const waText = lines.filter(Boolean).join("\n");
- 
+
   setTimeout(()=>{ window.open(waLink(waText), "_blank"); }, 500);
 });
- 
+
+/* fade in videos once they're ready to play (smoother than abrupt pop-in) — only for autoplay videos */
+function bindVideoFadeIn(root=document){
+  root.querySelectorAll("video[autoplay]").forEach(v=>{
+    if(v.dataset.fadeBound) return;
+    v.dataset.fadeBound = "1";
+    if(v.readyState >= 2){ v.classList.add("video-ready"); }
+    else{
+      v.addEventListener("loadeddata", ()=> v.classList.add("video-ready"), {once:true});
+      v.addEventListener("canplay", ()=> v.classList.add("video-ready"), {once:true});
+    }
+  });
+}
+const videoFadeObserver = new MutationObserver(()=> bindVideoFadeIn());
+videoFadeObserver.observe(document.body, {childList:true, subtree:true});
+
 /* init */
 render();
- 
+bindVideoFadeIn();
+
 /* pause hero video off-screen for perf */
 const heroVideo = document.getElementById("heroVideo");
 const heroObs = new IntersectionObserver((entries)=>{
@@ -1377,4 +1400,3 @@ heroObs.observe(document.getElementById("home"));
 </script>
 </body>
 </html>
- 
